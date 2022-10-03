@@ -8,11 +8,26 @@ import java.util.*;
  * @date 2022/9/28
  */
 public class TianJin extends ProvincesInfo implements ProvinceInfoGenerator {
+    private static String provinceName;
+    // 省份内包含的城市名称
+    private static String[] cityName;
+    // 城市对应的区名称
+    private static LinkedHashMap<String,String[]> districtName = new LinkedHashMap<>();
+    // 区对应的街道名称
+    // static Map<String,String[]> blockName;
+    /*
+    身份证号地址码信息
+     */
+    // 省份名称对应代码
+    private static Integer provinceId;
+    // 城市名称对应的代码
+    private static LinkedHashMap<String,String> cityId = new LinkedHashMap<>();
+    // 区所对应的代码
+    private static LinkedHashMap<String,String> districtId = new LinkedHashMap<>();
 
     static {
         provinceName = "天津市";
         cityName = new String[]{"天津市"};
-        districtName = new HashMap<>();
         districtName.put("天津市",new String[]{"和平区","河东区","河西区","南开区","河北区","红桥区","滨海新区","东丽区","西青区","津南区","北辰区","武清区","宝坻区","宁河区","静海区","蓟州区"});
         /*
         blockName = new HashMap<>();
@@ -25,9 +40,7 @@ public class TianJin extends ProvincesInfo implements ProvinceInfoGenerator {
 
          */
         provinceId = 12;
-        cityId = new HashMap<>();
         cityId.put("天津市","01");
-        districtId = new HashMap<>();
         districtId.put("和平区","01");
         districtId.put("河东区","02");
         districtId.put("河西区","03");
