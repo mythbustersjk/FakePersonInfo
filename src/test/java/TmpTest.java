@@ -1,9 +1,11 @@
 import org.Phoebej.provinces.ProvinceInfoGenerator;
+import org.Phoebej.provinces.Provinces;
 import org.Phoebej.provinces.TianJin;
 import org.Phoebej.utils.FackePersonUtils;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Random;
 
 
@@ -64,8 +66,20 @@ public class TmpTest {
     @Test
     public void testGetPersonInfo() throws Exception {
         for (int i = 0; i<100; i++) {
-            System.out.println(FackePersonUtils.generatePersonInfo(new TianJin(),0));
+            System.out.println(FackePersonUtils.generatePersonInfoMap(new TianJin(),0));
         }
+    }
+
+    @Test
+    public void testGetPersonInfoPS() throws Exception {
+        for (int i = 0; i<100; i++) {
+            System.out.println(FackePersonUtils.generatePersonInfoMap(0));
+        }
+    }
+    @Test
+    public void testGetProvinces() throws Exception {
+        List<ProvinceInfoGenerator> a = Provinces.getProvincesList();
+        System.out.println(a.size());
     }
 
 }
