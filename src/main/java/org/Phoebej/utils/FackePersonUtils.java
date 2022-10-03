@@ -3,7 +3,8 @@ package org.Phoebej.utils;
 
 import org.Phoebej.entity.PersonInfo;
 import org.Phoebej.provinces.ProvinceInfoGenerator;
-import org.Phoebej.provinces.TianJin;
+import org.Phoebej.provinces.Provinces;
+
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -11,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * 人员信息生成工具类
  * @author Phoebej
  * @date 2022/9/26
  */
@@ -20,11 +22,11 @@ public abstract class FackePersonUtils {
     private static String[] givenNameArray;
     private static String startDate;
 
-    private static Date birthday;
-    private static String gender;
-    private static String name;
+
+
 
     static {
+
         startDate = "1970-01-01";
         famlyNameArrayOne = new String[]{"赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "楮", "卫", "蒋", "沈", "韩", "杨", "朱", "秦",
                 "尤", "许", "何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏", "陶", "姜", "戚", "谢", "邹", "喻", "柏", "水", "窦",
@@ -174,17 +176,6 @@ public abstract class FackePersonUtils {
 
     }
 
-    public static Date getBirthday() {
-        return birthday;
-    }
-
-    public static String getGender() {
-        return gender;
-    }
-
-    public static String getName() {
-        return name;
-    }
 
     /**
      * 随机生成姓名方法
@@ -196,12 +187,12 @@ public abstract class FackePersonUtils {
         Random rand = new Random();
         int tmp = rand.nextInt(100000);
         if (tmp % 2 == 0) {
-            FackePersonUtils.name = famlyNameArrayOne[rand.nextInt(famlyNameArrayOne.length)] + givenNameArray[rand.nextInt(givenNameArray.length)];
+            name = famlyNameArrayOne[rand.nextInt(famlyNameArrayOne.length)] + givenNameArray[rand.nextInt(givenNameArray.length)];
         } else {
-            FackePersonUtils.name = famlyNameArrayTwo[rand.nextInt(famlyNameArrayOne.length)] + givenNameArray[rand.nextInt(givenNameArray.length)] + givenNameArray[rand.nextInt(givenNameArray.length)];
+            name = famlyNameArrayTwo[rand.nextInt(famlyNameArrayOne.length)] + givenNameArray[rand.nextInt(givenNameArray.length)] + givenNameArray[rand.nextInt(givenNameArray.length)];
         }
 
-        return FackePersonUtils.name;
+        return name;
     }
 
     /**
@@ -219,23 +210,23 @@ public abstract class FackePersonUtils {
             switch (model) {
                 case 0:
                     if (rand.nextInt(5) % 2 == 0) {
-                        FackePersonUtils.gender = "male";
+                        gender = "male";
                     } else {
-                        FackePersonUtils.gender = "female";
+                        gender = "female";
                     }
                     break;
                 case 1:
                     int tmp = rand.nextInt(3);
                     if (tmp == 0) {
-                        FackePersonUtils.gender = "male";
+                        gender = "male";
                     } else if (tmp == 1) {
-                        FackePersonUtils.gender = "female";
+                        gender = "female";
                     } else {
-                        FackePersonUtils.gender = "unknown";
+                        gender = "unknown";
                     }
                     break;
                 default:
-                    FackePersonUtils.gender = "unknown";
+                    gender = "unknown";
                     break;
             }
 
@@ -243,7 +234,7 @@ public abstract class FackePersonUtils {
         } else {
             throw new Exception("模式错误");
         }
-        return FackePersonUtils.gender;
+        return gender;
 
 
     }
@@ -268,7 +259,6 @@ public abstract class FackePersonUtils {
                 year100 = false;
             }
         }
-        FackePersonUtils.birthday = randomDate;
         return randomDate;
 
     }
@@ -286,7 +276,8 @@ public abstract class FackePersonUtils {
         // 校验码计算参数
         int[] verificationParameters = new int[]{7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
         Random rand = new Random();
-        ProvinceInfoGenerator pg = new TianJin();
+        List<ProvinceInfoGenerator> pgList =  Provinces.getProvincesList();
+        ProvinceInfoGenerator pg = (ProvinceInfoGenerator) pgList.get(rand.nextInt(pgList.size()));
         // 获取身份证地区码
         String localId = pg.generateInfo().get("id");
         // 获取身份证生日码
@@ -374,8 +365,10 @@ public abstract class FackePersonUtils {
      * @return 随机地址
      */
     public static String generateAddress(){
+        Random rand = new Random();
         String address;
-        ProvinceInfoGenerator pg = new TianJin();
+        List<ProvinceInfoGenerator> pgList =  Provinces.getProvincesList();
+        ProvinceInfoGenerator pg = (ProvinceInfoGenerator) pgList.get(rand.nextInt(pgList.size()));
         Map<String,String> infoMap = pg.generateInfo();
         if(infoMap.get("province").equals(infoMap.get("city"))){
             address = infoMap.get("city")+infoMap.get("district");
@@ -386,7 +379,7 @@ public abstract class FackePersonUtils {
     }
 
     /**
-     * 随机生成个人信息
+     * 随机生成指定城市的个人信息Map
      * @param pg ProvinceInfoGenerator对象
      * @param genderModel 个人信息性别生成模式（0 或 1）
      * @return 包含个人信息的Map<String,String>
@@ -415,7 +408,38 @@ public abstract class FackePersonUtils {
     }
 
     /**
-     * 随机生成个人信息
+     * 随机生成个人信息Map
+     * @param genderModel 个人信息性别生成模式（0 或 1）
+     * @return 包含个人信息的Map<String,String>
+     * @throws Exception 个人信息性别生成模式错误以及时间格式或错误
+     */
+    public static Map<String,String> generatePersonInfoMap(int genderModel) throws Exception {
+        Random rand = new Random();
+        Map<String,String> personInfo = new LinkedHashMap<>();
+        String name = generateName();
+        String gender = generateGender(genderModel);
+        java.util.Date birthday = generateBirthday();
+        String address;
+        List<ProvinceInfoGenerator> pgList =  Provinces.getProvincesList();
+        ProvinceInfoGenerator pg = (ProvinceInfoGenerator) pgList.get(rand.nextInt(pgList.size()));
+        Map<String,String> infoMap = pg.generateInfo();
+        if(infoMap.get("province").equals(infoMap.get("city"))){
+            address = infoMap.get("city")+infoMap.get("district");
+        }else{
+            address = infoMap.get("province")+infoMap.get("city")+infoMap.get("district");
+        }
+        String id =generateId(infoMap.get("id"),birthday,gender);
+        personInfo.put("name",name);
+        personInfo.put("gender",gender);
+        personInfo.put("birthday",birthday.toString());
+        personInfo.put("address",address);
+        personInfo.put("id",id);
+        return personInfo;
+
+    }
+
+    /**
+     * 随机生成指定城市的个人信息对象
      * @param pg ProvinceInfoGenerator对象
      * @param genderModel 个人信息性别生成模式（0 或 1）
      * @return 包含个人信息的PersonInfo对象
@@ -442,6 +466,40 @@ public abstract class FackePersonUtils {
         return personInfo;
 
     }
+
+    /**
+     * 随机生成个人信息对象
+     * @param genderModel 个人信息性别生成模式（0 或 1）
+     * @return 包含个人信息的PersonInfo对象
+     * @throws Exception 个人信息性别生成模式错误以及时间格式或错误
+     */
+    public static PersonInfo generatePersonInfoObject(int genderModel) throws Exception {
+        Random rand = new Random();
+        PersonInfo personInfo = new PersonInfo();
+        String name = generateName();
+        String gender = generateGender(genderModel);
+        java.sql.Date birthday = generateBirthday();
+        String address = null;
+        List<ProvinceInfoGenerator> pgList =  Provinces.getProvincesList();
+        ProvinceInfoGenerator pg = (ProvinceInfoGenerator) pgList.get(rand.nextInt(pgList.size()));
+        Map<String,String> infoMap = pg.generateInfo();
+        if(infoMap.get("province").equals(infoMap.get("city"))){
+            address = infoMap.get("city")+infoMap.get("district");
+        }else{
+            address = infoMap.get("province")+infoMap.get("city")+infoMap.get("district");
+        }
+        String id =generateId(infoMap.get("id"),birthday,gender);
+        personInfo.setName(name);
+        personInfo.setGender(gender);
+        personInfo.setAddress(address);
+        personInfo.setBirthDate(birthday);
+        personInfo.setId(id);
+        return personInfo;
+
+    }
+
+
+
 
     /**
      * 计算随机生成的日期与系统当前日期所差年数
