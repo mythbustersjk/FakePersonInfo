@@ -1,7 +1,8 @@
 import org.Phoebej.provinces.ProvinceInfoGenerator;
 import org.Phoebej.provinces.Provinces;
 import org.Phoebej.provinces.TianJin;
-import org.Phoebej.utils.FackePersonUtils;
+import org.Phoebej.utils.FakePersonUtils;
+import org.Phoebej.utils.PhoneNumGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.Random;
  * @date 2022/9/26
  */
 public class TmpTest {
+    FakePersonUtils fp = new FakePersonUtils();
     @Test
     public void testTmp() throws Exception {
         System.out.println(2%2);
@@ -21,7 +23,7 @@ public class TmpTest {
     @Test
     public void testGender() throws Exception {
         for (int i = 0; i<10; i++) {
-            System.out.println(FackePersonUtils.generateGender(1));
+            System.out.println(fp.generateGender(1));
         }
     }
 
@@ -30,7 +32,7 @@ public class TmpTest {
 
         for (int i = 0; i<10; i++) {
 
-            System.out.println(FackePersonUtils.generateBirthday());
+            System.out.println(fp.generateBirthday());
         }
 
     }
@@ -52,34 +54,46 @@ public class TmpTest {
     @Test
     public void testId() throws Exception {
         for (int i = 0; i<100; i++) {
-            System.out.println(FackePersonUtils.generateId());
+            System.out.println(fp.generateId());
         }
     }
 
     @Test
     public void testAddress() throws Exception {
         for (int i = 0; i<100; i++) {
-            System.out.println(FackePersonUtils.generateAddress());
+            System.out.println(fp.generateAddress());
         }
     }
 
     @Test
     public void testGetPersonInfo() throws Exception {
         for (int i = 0; i<100; i++) {
-            System.out.println(FackePersonUtils.generatePersonInfoMap(new TianJin(),0));
+            System.out.println(fp.generatePersonInfoMap(new TianJin(),0));
         }
     }
 
     @Test
     public void testGetPersonInfoPS() throws Exception {
         for (int i = 0; i<100; i++) {
-            System.out.println(FackePersonUtils.generatePersonInfoMap(0));
+            System.out.println(fp.generatePersonInfoMap(0));
         }
     }
     @Test
     public void testGetProvinces() throws Exception {
         List<ProvinceInfoGenerator> a = Provinces.getProvincesList();
         System.out.println(a.size());
+    }
+    @Test
+    public void testGetPhoneNum(){
+        for (int i = 0; i<100; i++) {
+            System.out.println(PhoneNumGenerator.generatePhoneNumber());
+        }
+    }
+    @Test
+    public void testGetPhoneNumUseModel() throws Exception {
+        for (int i = 0; i<100; i++) {
+            System.out.println(PhoneNumGenerator.generatePhoneNumber(3));
+        }
     }
 
 }
