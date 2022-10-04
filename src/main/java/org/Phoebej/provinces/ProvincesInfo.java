@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
  * 所有省份类的父类，定义子类中需要初始化的成员属性
  * @author Phoebej
  * @date 2022/10/1
+ * @since v0.1.0
  */
 public abstract class ProvincesInfo {
     /**
