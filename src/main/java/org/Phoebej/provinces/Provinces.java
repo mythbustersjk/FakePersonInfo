@@ -7,6 +7,7 @@ import java.util.List;
  * 身份信息集合对象
  * @author Phoebej
  * @date 2022/10/2
+ * @since v0.2.0
  */
 public class Provinces {
     private static ArrayList<ProvinceInfoGenerator> provincesList = new ArrayList<>();
