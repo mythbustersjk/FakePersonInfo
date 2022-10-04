@@ -6,6 +6,7 @@ import java.sql.Date;
  * 所有承接所生成的人员信息父类
  * @author Phoebej
  * @date 2022/10/2
+ * @since v0.2.0
  */
 public class PersonInfo {
 
@@ -15,6 +16,7 @@ public class PersonInfo {
     private Date birthDate;
     private String address;
     private String id;
+    private String phoneNum;
 
     public PersonInfo(){
 
@@ -58,5 +60,13 @@ public class PersonInfo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }
