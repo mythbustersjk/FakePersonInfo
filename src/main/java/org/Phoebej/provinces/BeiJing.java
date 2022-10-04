@@ -8,6 +8,7 @@ import java.util.Random;
 /**
  * @author Phoebej
  * @date 2022/10/3
+ * @since v0.2.0
  */
 public class BeiJing extends ProvincesInfo implements ProvinceInfoGenerator{
     private static String provinceName;
