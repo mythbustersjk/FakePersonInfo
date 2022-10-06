@@ -1,5 +1,6 @@
 package org.Phoebej.utils;
 
+import org.Phoebej.constant.consist.PersonName;
 import org.Phoebej.provinces.ProvinceInfoGenerator;
 import org.Phoebej.provinces.Provinces;
 
@@ -16,6 +17,20 @@ import java.util.Random;
 public abstract class PersonAddressGenerator {
     private static Random rand = new Random();
     private static String address;
+
+
+    public static String generateElseAddress() {
+        String tmpAddress=null;
+        String[] addressNameArray = PersonName.getGivenNameArray();
+        StringBuffer addressBuffer = new StringBuffer();
+        String [] tmp = new String[]{"里","苑","府"};
+        // 生成小区名称
+        for (int i = 0; i < (rand.nextInt(2)+3); i++) {
+            addressBuffer.append(addressNameArray[rand.nextInt(addressNameArray.length)]);
+        }
+        tmpAddress = addressBuffer+ tmp[rand.nextInt(tmp.length)]+(rand.nextInt(20)+1)+"号楼"+(rand.nextInt(8)+1)+"门"+(rand.nextInt(300)+100);
+        return tmpAddress;
+    }
     /**
      * 随机生成地址信息
      * @return 随机地址
@@ -29,7 +44,7 @@ public abstract class PersonAddressGenerator {
         }else{
             address = infoMap.get("province")+infoMap.get("city")+infoMap.get("district");
         }
-        return address;
+        return address+generateElseAddress();
     }
 
     /**
@@ -43,6 +58,6 @@ public abstract class PersonAddressGenerator {
         }else{
             address = infoMap.get("province")+infoMap.get("city")+infoMap.get("district");
         }
-        return address;
+        return address+generateElseAddress();
     }
 }
