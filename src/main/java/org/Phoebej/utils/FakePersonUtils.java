@@ -156,7 +156,7 @@ public class FakePersonUtils {
         personInfo.put("name",name);
         personInfo.put("gender",gender);
         personInfo.put("birthday",birthday.toString());
-        personInfo.put("address",address);
+        personInfo.put("address",address+PersonAddressGenerator.generateElseAddress());
         personInfo.put("id",id);
         personInfo.put("phoneNum",phoneNum);
         return personInfo;
@@ -214,7 +214,7 @@ public class FakePersonUtils {
         String id =generateId(infoMap.get("id"),birthday,gender);
         personInfo.setName(name);
         personInfo.setGender(gender);
-        personInfo.setAddress(address);
+        personInfo.setAddress(address+PersonAddressGenerator.generateAddress());
         personInfo.setBirthDate(birthday);
         personInfo.setId(id);
         personInfo.setPhoneNum(phoneNum);
