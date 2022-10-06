@@ -2,6 +2,7 @@ import org.Phoebej.provinces.ProvinceInfoGenerator;
 import org.Phoebej.provinces.Provinces;
 import org.Phoebej.provinces.TianJin;
 import org.Phoebej.utils.FakePersonUtils;
+import org.Phoebej.utils.PersonAddressGenerator;
 import org.Phoebej.utils.PhoneNumGenerator;
 import org.junit.jupiter.api.Test;
 
@@ -93,6 +94,13 @@ public class TmpTest {
     public void testGetPhoneNumUseModel() throws Exception {
         for (int i = 0; i<100; i++) {
             System.out.println(PhoneNumGenerator.generatePhoneNumber(3));
+        }
+    }
+
+    @Test
+    public void testGetFullAddress(){
+        for (int i = 0; i<100; i++) {
+            System.out.println(PersonAddressGenerator.generateAddress());
         }
     }
 
