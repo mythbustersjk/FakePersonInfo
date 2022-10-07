@@ -99,4 +99,4 @@ Mapper.xml示例：
 
 运行结果：
 
-![Screenshot 2022-10-07 at 19.30.00](/Users/phoebej/Library/Application Support/typora-user-images/Screenshot 2022-10-07 at 19.30.00.png)
+![运行结果](https://github.com/mythbustersjk/mdphotos/blob/main/Screenshot%202022-10-07%20at%2019.35.45.png)
