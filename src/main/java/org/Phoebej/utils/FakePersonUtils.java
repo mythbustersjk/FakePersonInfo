@@ -214,7 +214,7 @@ public class FakePersonUtils {
         String id =generateId(infoMap.get("id"),birthday,gender);
         personInfo.setName(name);
         personInfo.setGender(gender);
-        personInfo.setAddress(address+PersonAddressGenerator.generateAddress());
+        personInfo.setAddress(address+PersonAddressGenerator.generateElseAddress());
         personInfo.setBirthDate(birthday);
         personInfo.setId(id);
         personInfo.setPhoneNum(phoneNum);
