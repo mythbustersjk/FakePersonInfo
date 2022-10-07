@@ -37,13 +37,13 @@
   生成对象成员变量示例如下：
 
   ```java
- ps = {PersonInfo@1786} 
- phoneNum = "19236921685"
- id = "110108200801287567"
- address = "北京市海淀区河什蔽隔里13号楼3门313"
- birthDate = {Date@1789} "2008-01-28"
- gender = "male"
- name = "陈编"
+  ps = {PersonInfo@1786} 
+  phoneNum = "19236921685"
+  id = "110108200801287567"
+  address = "北京市海淀区河什蔽隔里13号楼3门313"
+  birthDate = {Date@1789} "2008-01-28"
+  gender = "male"
+  name = "陈编"
 
   ```
 
