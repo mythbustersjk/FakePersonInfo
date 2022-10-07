@@ -37,13 +37,14 @@
   生成对象成员变量示例如下：
 
   ```java
-  ps = {PersonInfo@1789} 
-   name = "弓魂多"
-   gender = "male"
-   birthDate = {Date@1792} "1985-04-05"
-   address = "北京市朝阳区北京市密云区蜡滑偿债府3号楼1门273"
-   id = "110105198504057283"
-   phoneNum = "18191948432"
+ ps = {PersonInfo@1786} 
+ phoneNum = "19236921685"
+ id = "110108200801287567"
+ address = "北京市海淀区河什蔽隔里13号楼3门313"
+ birthDate = {Date@1789} "2008-01-28"
+ gender = "male"
+ name = "陈编"
+
   ```
 
   
@@ -99,4 +100,4 @@ Mapper.xml示例：
 
 运行结果：
 
-![Screenshot 2022-10-07 at 19.30.00](/Users/phoebej/Library/Application Support/typora-user-images/Screenshot 2022-10-07 at 19.30.00.png)
+![运行结果](https://github.com/mythbustersjk/mdphotos/blob/main/Screenshot%202022-10-07%20at%2020.33.01.png)
