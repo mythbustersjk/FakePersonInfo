@@ -74,7 +74,7 @@ public class FakePersonUtils {
      * @return 随机地址
      */
     public  String generateAddress(){
-        return PersonAddressGenerator.generateAddress();
+        return PersonAddressGenerator.generateAddress().get("address");
     }
 
     /**
@@ -143,20 +143,12 @@ public class FakePersonUtils {
         String gender = generateGender(genderModel);
         java.util.Date birthday = generateBirthday();
         String phoneNum = generatePhoneNum();
-        String address;
-        List<ProvinceInfoGenerator> pgList =  Provinces.getProvincesList();
-        ProvinceInfoGenerator pg = (ProvinceInfoGenerator) pgList.get(rand.nextInt(pgList.size()));
-        Map<String,String> infoMap = pg.generateInfo();
-        if(infoMap.get("province").equals(infoMap.get("city"))){
-            address = infoMap.get("city")+infoMap.get("district");
-        }else{
-            address = infoMap.get("province")+infoMap.get("city")+infoMap.get("district");
-        }
-        String id =generateId(infoMap.get("id"),birthday,gender);
+        Map<String,String> addressInfo = PersonAddressGenerator.generateAddress();
+        String id = generateId(addressInfo.get("id"),birthday,gender);
         personInfo.put("name",name);
         personInfo.put("gender",gender);
         personInfo.put("birthday",birthday.toString());
-        personInfo.put("address",address+PersonAddressGenerator.generateElseAddress());
+        personInfo.put("address",addressInfo.get("address"));
         personInfo.put("id",id);
         personInfo.put("phoneNum",phoneNum);
         return personInfo;
@@ -202,19 +194,11 @@ public class FakePersonUtils {
         String gender = generateGender(genderModel);
         java.sql.Date birthday = generateBirthday();
         String phoneNum = generatePhoneNum();
-        String address = null;
-        List<ProvinceInfoGenerator> pgList =  Provinces.getProvincesList();
-        ProvinceInfoGenerator pg = (ProvinceInfoGenerator) pgList.get(rand.nextInt(pgList.size()));
-        Map<String,String> infoMap = pg.generateInfo();
-        if(infoMap.get("province").equals(infoMap.get("city"))){
-            address = infoMap.get("city")+infoMap.get("district");
-        }else{
-            address = infoMap.get("province")+infoMap.get("city")+infoMap.get("district");
-        }
-        String id =generateId(infoMap.get("id"),birthday,gender);
+        Map<String,String> addressInfo = PersonAddressGenerator.generateAddress();
+        String id = generateId(addressInfo.get("id"),birthday,gender);
         personInfo.setName(name);
         personInfo.setGender(gender);
-        personInfo.setAddress(address+PersonAddressGenerator.generateElseAddress());
+        personInfo.setAddress(addressInfo.get("address"));
         personInfo.setBirthDate(birthday);
         personInfo.setId(id);
         personInfo.setPhoneNum(phoneNum);
