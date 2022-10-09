@@ -1,3 +1,4 @@
+import org.Phoebej.entity.PersonInfo;
 import org.Phoebej.provinces.ProvinceInfoGenerator;
 import org.Phoebej.provinces.Provinces;
 import org.Phoebej.provinces.TianJin;
@@ -74,7 +75,14 @@ public class TmpTest {
     }
 
     @Test
-    public void testGetPersonInfoPS() throws Exception {
+    public void testGetPersonInfoOb() throws Exception {
+        for (int i = 0; i<100; i++) {
+            PersonInfo ps = fp.generatePersonInfoObject(0);
+            System.out.println(ps.getAddress()+" "+ps.getId());
+        }
+    }
+    @Test
+    public void testGetPersonInfoMp() throws Exception {
         for (int i = 0; i<100; i++) {
             System.out.println(fp.generatePersonInfoMap(0));
         }
